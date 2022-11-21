@@ -1,0 +1,69 @@
+*{
+    padding: 0;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+}
+.main-body{
+    height: 100vh;
+    width: 100vw;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    padding: 0 5%;
+    box-sizing: border-box;
+}
+.contact-card-main-container{
+    width: 100%;
+    height: 80%;
+    margin: auto 0 auto auto;
+    background-color: white;
+    border-radius: 1em;
+    padding: 8%;
+    box-sizing: border-box;
+    box-shadow: 0 0 3rem rgb(196, 196, 196);
+}
+.contact-card-main-container input:focus{
+    outline: none;
+}
+.input-container-for-name{
+    position: relative;
+    color: rgb(75, 75, 75);
+}
+
+
+
+.name-label{
+    width: 100%;
+    height: 100%;
+    font-size: 1.1rem;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    transition: transform 300ms ease-in-out,font-size 300ms ease-in-out;
+}
+.name-label:hover{
+    cursor: pointer;
+}
+.name-field{
+    height: 100%;
+    width: 100%;
+    padding: 2%;
+    box-sizing: border-box;
+    border: none;
+    font-size: 1.05rem;
+    color: rgb(75, 75, 75);
+}
+.name-field:hover{
+    cursor:pointer;
+}
+.name-field:focus{
+    border-bottom: 1px solid rgb(174, 174, 174);
+}
+.contact-card-main-container:has(.name-field:not(:placeholder-shown)) .name-label{
+    --pre: calc(-2rem + 1px);
+    transform: translateY(var(--pre));
+    font-size: .8rem;
+}
+.contact-card-main-container:has(.name-field:focus) .name-label{
+    transform: translateY(-2rem);
+    font-size: .8rem;
+}
