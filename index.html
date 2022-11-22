@@ -9,6 +9,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/main.css">
     <title>Pointcalc</title>
+    <script defer>
+        setTimeout(function () {
+        let viewheight = $(window).height();
+        let viewwidth = $(window).width();
+        let viewport = document.querySelector("meta[name=viewport]");
+        viewport.setAttribute("content", "height=" + viewheight + "px, width=" + viewwidth + "px, initial-scale=1.0");
+    }, 300);
+    </script>
 </head>
 <body>
     <!-- <h1>Welcome to Pointcalc</h1> -->
