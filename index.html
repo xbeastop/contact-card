@@ -11,8 +11,8 @@
     <title>Pointcalc</title>
     <script defer>
         setTimeout(function () {
-        let viewheight = $(window).height();
-        let viewwidth = $(window).width();
+        let viewheight = window.innerHeight;
+        let viewwidth = window.innerWidth;
         let viewport = document.querySelector("meta[name=viewport]");
         viewport.setAttribute("content", "height=" + viewheight + "px, width=" + viewwidth + "px, initial-scale=1.0");
     }, 300);
