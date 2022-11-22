@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,6 +14,7 @@
     document.querySelector("meta[name=viewport]").setAttribute("content", "height=" + window.innerHeight + "px, width=" + window.innerWidth + "px, initial-scale=1.0")
     </script>
 </head>
+
 <body>
     <!-- <h1>Welcome to Pointcalc</h1> -->
     <!-- <a href="test/index.html">login</a> -->
@@ -22,10 +24,55 @@
         </div>
         <div class="contact-card-main-container">
             <div class="input-container-for-name">
-            <label for="name" class="name-label">Name</label>
-            <input type="text" id="name" name="name" class="name-field" placeholder=" ">
+                <label for="name" class="name-label">Name</label>
+                <input type="text" id="name" name="name" class="name-field" placeholder=" ">
             </div>
+
+            <div class="container-for-logo">
+                <input type="file" name="logo" id="logo">
+            </div>
+            <input type="text" placeholder="Lineup name (optional)" name="lineupName" id="lineupName">
+            <div class="playerNames" id="playerNames"></div>
         </div>
     </div>
 </body>
+<script>
+    //parent div for all player name
+    const playerNamesDiv = document.querySelector("#playerNames")
+
+    //a function that trigger when the user enter lineup name
+    document.querySelector("#lineupName").addEventListener("keyup", function () {
+        if (this.value.length == 0) removeLastTeamName()
+        else createPlayerNames()
+    })
+
+    function createPlayerNames() {
+        //no need to add more and more fields on each keyup
+        if (playerNamesDiv.innerHTML != "") return
+        addPlayerName()
+    }
+    function addPlayerName() {
+        const teamName = document.createElement('input')
+        //here the teamName class is doing nothing much but you get the idea
+        teamName.setAttribute("class", "teamName")
+        teamName.setAttribute("placeholder", "Team Name")
+        teamName.setAttribute("onkeyup", "addMorePlayerName(this)")
+        playerNamesDiv.append(teamName)
+    }
+
+    function addMorePlayerName(item) {
+        const noOfChildren = playerNamesDiv.childElementCount
+        //adding only if the user is in the last input
+        if (item == playerNamesDiv.children[noOfChildren - 1]) return addPlayerName()
+        //removing last input if the previous input is cleared
+        if (item == playerNamesDiv.children[noOfChildren - 2] && item.value == 0) removeLastTeamName()
+    }
+
+    function removeLastTeamName() {
+        const noOfChildren = playerNamesDiv.childElementCount
+        playerNamesDiv.removeChild(playerNamesDiv.children[noOfChildren - 1])
+    }
+
+</script>
+
 </html>
