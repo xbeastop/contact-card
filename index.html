@@ -75,6 +75,7 @@
     function addMorePlayerName(item) {
         const noOfChildren = playerNamesDiv.childElementCount
         //adding only if the user is in the last input
+        if(item.value != 0)
         if (item == playerNamesDiv.children[noOfChildren - 1].children[1]) return addPlayerName()
         //removing last input if the previous input is cleared
         if (item == playerNamesDiv.children[noOfChildren - 2].children[1] && item.value == 0) removeLastTeamName()
