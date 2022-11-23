@@ -52,22 +52,42 @@
         addPlayerName()
     }
     function addPlayerName() {
+        // adding a label for the teamName
+        const teamLabel = document.createElement("label")
+        teamLabel.innerHTML = "Team name"
+        teamLabel.setAttribute("class","team-label")
+        // team name input field 
         const teamName = document.createElement('input')
         //here the teamName class is doing nothing much but you get the idea
         teamName.setAttribute("class", "teamName")
         teamName.setAttribute("placeholder", "Team Name")
         teamName.setAttribute("onkeyup", "addMorePlayerName(this)")
-        playerNamesDiv.append(teamName)
+        // adding a div for wrapping the teamName and label 
+        const teamNameWrapper = document.createElement("div")
+        teamNameWrapper.setAttribute("class","team-name-wrapper")
+        // appending the team label and team name to the wrapper div 
+        teamNameWrapper.append(teamLabel)
+        teamNameWrapper.append(teamName)
+        // adding the wrapper div to the parent(playerNameDiv) div 
+        playerNamesDiv.append(teamNameWrapper)
     }
 
     function addMorePlayerName(item) {
         const noOfChildren = playerNamesDiv.childElementCount
         //adding only if the user is in the last input
-        if (item == playerNamesDiv.children[noOfChildren - 1]) return addPlayerName()
+        if (item == playerNamesDiv.children[noOfChildren - 1].children[1]) return addPlayerName()
         //removing last input if the previous input is cleared
-        if (item == playerNamesDiv.children[noOfChildren - 2] && item.value == 0) removeLastTeamName()
+        if (item == playerNamesDiv.children[noOfChildren - 2].children[1] && item.value == 0) removeLastTeamName()
+        // i don't know this is needed . But just adding it...So if you don't need this feature then remove it. This is for removing an input field if it is empty.
+        if(item.value == 0) removeCurrentTeamName(item,noOfChildren)
     }
-
+    // this is the function for removing the input field if it is empty
+    const removeCurrentTeamName = (element,noOfChildren) => {
+        if(playerNamesDiv.children[noOfChildren - 2].children[1] == element) {
+            addPlayerName()
+        }
+        element.parentElement.remove()
+    }
     function removeLastTeamName() {
         const noOfChildren = playerNamesDiv.childElementCount
         playerNamesDiv.removeChild(playerNamesDiv.children[noOfChildren - 1])
