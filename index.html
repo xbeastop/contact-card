@@ -74,19 +74,27 @@
 
     function addMorePlayerName(item) {
         const noOfChildren = playerNamesDiv.childElementCount
+        let lastItem = (item == playerNamesDiv.children[noOfChildren - 1].children[1]) ? true : false
         //adding only if the user is in the last input
         if(item.value != 0)
-        if (item == playerNamesDiv.children[noOfChildren - 1].children[1]){
+        if (lastItem == true){
             changeLabel(item)
             return addPlayerName()
         }
         //removing current input if the previous input is cleared
-        if (item.value == 0 && noOfChildren > 1) {
-            nextInputField(item) 
+        if (item.value == 0 && noOfChildren > 1 && lastItem == false) {
+            nextInputField(item)
             removeCurrentTeamName(item)
         }
+        if(event.key == 'Backspace'){
+            if (lastItem == true){
+                if(item.value == 0)previousInputField(item)
+            }
+        }
         //checking if the enter key is pressed
-        if(event.key == 'Enter') nextInputField(item)//function for moving to the next input field when the enter key is pressed.
+        if(event.key == 'Enter' && lastItem == false) {
+            nextInputField(item)//function for moving to the next input field when the enter key is pressed.
+        }
     }
     function removeLastTeamName(element){
         element.nextSibling.children[0].remove()
@@ -98,6 +106,9 @@
     // function for moving to the next input field 
     function nextInputField(element){
         element.parentElement.nextSibling.children[1].focus()
+    }
+    function previousInputField(element){
+        element.parentElement.previousSibling.children[1].focus()
     }
     function changeLabel(element){
         element.previousSibling.innerHTML = "Team name"
