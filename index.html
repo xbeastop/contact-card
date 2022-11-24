@@ -74,7 +74,10 @@
 
     function addMorePlayerName(item) {
         const noOfChildren = playerNamesDiv.childElementCount
+        // storing that the element is last or not
         let lastItem = (item == playerNamesDiv.children[noOfChildren - 1].children[1]) ? true : false
+        // storing that the element is first or not
+        let firstItem = (noOfChildren == 1) ? true : false
         //adding only if the user is in the last input
         if(item.value != 0)
         if (lastItem == true){
@@ -87,7 +90,7 @@
             removeCurrentTeamName(item)
         }
         if(event.key == 'Backspace'){
-            if (lastItem == true){
+            if (lastItem == true && firstItem == false){
                 if(item.value == 0)previousInputField(item)
             }
         }
