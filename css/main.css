@@ -79,6 +79,54 @@
 }
 
 
+
+
+.playerNames{
+    padding: 2% 0;
+}
+.team-name-wrapper{
+    width: 100%;
+    position: relative;
+    padding: 2% 0;
+}
+.team-label{
+    pointer-events: none;
+    width: 100%;
+    height: 100%;
+    font-size: 1.1rem;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    transition: transform 300ms ease-in-out,font-size 300ms ease-in-out;
+}
+.team-label:hover{
+    cursor: pointer;
+}
+.teamName{
+    height: 100%;
+    width: 100%;
+    padding: 3% 0 .5%;
+    box-sizing: border-box;
+    border: none;
+    font-size: 1rem;
+    color: rgb(0, 0, 0);
+    border-bottom: 1px solid rgb(174, 174, 174);
+}
+.teamName:hover{
+    cursor:pointer;
+}
+/* .teamName:focus{
+} */
+.team-name-wrapper:has(.teamName:not(:placeholder-shown)) .team-label{
+    --pre: calc(-1.5rem + 1px);
+    transform: translateY(var(--pre));
+    font-size: .7rem;
+}
+.team-name-wrapper:has(.teamName:focus) .team-label{
+    transform: translateY(-1.5rem);
+    font-size: .7rem;
+}
+
 @media (width <= 500px){
     .main-body{
         flex-direction: column-reverse;

@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="css/main.css">
     <title>Pointcalc</title>
     <script>
-    document.querySelector("meta[name=viewport]").setAttribute("content", "height=" + window.innerHeight + "px, width=" + window.innerWidth + "px, initial-scale=1.0")
+    // document.querySelector("meta[name=viewport]").setAttribute("content", "height=" + window.innerHeight + "px, width=" + window.innerWidth + "px, initial-scale=1.0")
     </script>
 </head>
 
@@ -42,7 +42,7 @@
 
     //a function that trigger when the user enter lineup name
     document.querySelector("#lineupName").addEventListener("keyup", function () {
-        if (this.value.length == 0) removeLastTeamName()
+        if (this.value.length == 0) removeLastTeamName(this)
         else createPlayerNames()
     })
 
@@ -54,13 +54,13 @@
     function addPlayerName() {
         // adding a label for the teamName
         const teamLabel = document.createElement("label")
-        teamLabel.innerHTML = "Team name"
+        teamLabel.innerHTML = "Team name +"
         teamLabel.setAttribute("class","team-label")
         // team name input field 
         const teamName = document.createElement('input')
         //here the teamName class is doing nothing much but you get the idea
         teamName.setAttribute("class", "teamName")
-        teamName.setAttribute("placeholder", "Team Name")
+        teamName.setAttribute("placeholder", " ")
         teamName.setAttribute("onkeyup", "addMorePlayerName(this)")
         // adding a div for wrapping the teamName and label 
         const teamNameWrapper = document.createElement("div")
@@ -76,14 +76,20 @@
         const noOfChildren = playerNamesDiv.childElementCount
         //adding only if the user is in the last input
         if(item.value != 0)
-        if (item == playerNamesDiv.children[noOfChildren - 1].children[1]) return addPlayerName()
+        if (item == playerNamesDiv.children[noOfChildren - 1].children[1]){
+            changeLabel(item)
+            return addPlayerName()
+        }
         //removing current input if the previous input is cleared
         if (item.value == 0 && noOfChildren > 1) {
-            nextInputField(item)
+            nextInputField(item) 
             removeCurrentTeamName(item)
         }
         //checking if the enter key is pressed
         if(event.key == 'Enter') nextInputField(item)//function for moving to the next input field when the enter key is pressed.
+    }
+    function removeLastTeamName(element){
+        element.nextSibling.children[0].remove()
     }
     // function for removing the input field if it is empty
     function removeCurrentTeamName(element){
@@ -92,6 +98,9 @@
     // function for moving to the next input field 
     function nextInputField(element){
         element.parentElement.nextSibling.children[1].focus()
+    }
+    function changeLabel(element){
+        element.previousSibling.innerHTML = "Team name"
     }
 
 </script>
