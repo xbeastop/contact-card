@@ -77,21 +77,12 @@
         //adding only if the user is in the last input
         if(item.value != 0)
         if (item == playerNamesDiv.children[noOfChildren - 1].children[1]) return addPlayerName()
-        //removing last input if the previous input is cleared
-        if (item == playerNamesDiv.children[noOfChildren - 2].children[1] && item.value == 0) removeLastTeamName()
-        // i don't know this is needed . But just adding it...So if you don't need this feature then remove it. This is for removing an input field if it is empty.
-        if(item.value == 0) removeCurrentTeamName(item,noOfChildren)
+        //removing current input if the previous input is cleared
+        if (item.value == 0 && noOfChildren > 1) removeCurrentTeamName(item)
     }
     // this is the function for removing the input field if it is empty
-    const removeCurrentTeamName = (element,noOfChildren) => {
-        if(playerNamesDiv.children[noOfChildren - 2].children[1] == element) {
-            addPlayerName()
-        }
+    const removeCurrentTeamName = (element) => {
         element.parentElement.remove()
-    }
-    function removeLastTeamName() {
-        const noOfChildren = playerNamesDiv.childElementCount
-        playerNamesDiv.removeChild(playerNamesDiv.children[noOfChildren - 1])
     }
 
 </script>
