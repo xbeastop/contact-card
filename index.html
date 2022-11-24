@@ -78,11 +78,20 @@
         if(item.value != 0)
         if (item == playerNamesDiv.children[noOfChildren - 1].children[1]) return addPlayerName()
         //removing current input if the previous input is cleared
-        if (item.value == 0 && noOfChildren > 1) removeCurrentTeamName(item)
+        if (item.value == 0 && noOfChildren > 1) {
+            nextInputField(item)
+            removeCurrentTeamName(item)
+        }
+        //checking if the enter key is pressed
+        if(event.key == 'Enter') nextInputField(item)//function for moving to the next input field when the enter key is pressed.
     }
-    // this is the function for removing the input field if it is empty
-    const removeCurrentTeamName = (element) => {
+    // function for removing the input field if it is empty
+    function removeCurrentTeamName(element){
         element.parentElement.remove()
+    }
+    // function for moving to the next input field 
+    function nextInputField(element){
+        element.parentElement.nextSibling.children[1].focus()
     }
 
 </script>
